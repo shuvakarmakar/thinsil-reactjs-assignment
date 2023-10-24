@@ -18,7 +18,7 @@ const Signup = () => {
                 console.log(loggedUser);
                 // Save user data
                 const saveUser = { name: data.name, email: data.email };
-                fetch('/your-api-endpoint', {
+                fetch('/users', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
