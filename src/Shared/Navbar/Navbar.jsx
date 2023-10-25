@@ -26,7 +26,7 @@ const Navbar = () => {
     const navItems = (
         <>
             <li className="text-black"><Link to="/">Home</Link></li>
-            <li><Link to="/dashboard">Dashboard</Link></li>
+            {isAdmin && <li><Link to="/dashboard">Dashboard</Link></li>}
             {!isAdmin && <li><Link to="/dashboard/cart"><FaCartPlus /> Cart</Link></li>}
         </>
     );
@@ -60,11 +60,6 @@ const Navbar = () => {
             </div>
             {user ? (
                 <div className="navbar-end">
-                    {userData && (
-                        <span className="text-slate-900 mr-2">
-                            Welcome, <Link to="/profile">{userData.displayName}</Link>
-                        </span>
-                    )}
                     <button onClick={handleLogout} className="btn btn-neutral">
                         Logout
                     </button>
