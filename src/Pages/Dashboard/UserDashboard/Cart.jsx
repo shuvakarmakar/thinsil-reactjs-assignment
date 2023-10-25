@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
-import { AuthContext } from '../../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../../Provider/AuthProvider';
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -89,7 +89,7 @@ const Cart = () => {
                                     />
                                 </td>
                                 <td>{item.product.name}</td>
-                                <td>${item.product.price.toFixed(2)}</td>
+                                <td>${item.product.price}</td>
                                 <td>{item.quantity}</td>
                                 <td>
                                     <button

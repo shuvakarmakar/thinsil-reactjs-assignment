@@ -7,10 +7,10 @@ import Signup from "../Pages/Signup/Signup";
 import Error from "../Pages/Error/Error";
 import Dashboard from "../Layout/Dashboard";
 import ManageProducts from "../Pages/Dashboard/Admin Dashboard/ManageProducts";
-import ManageUsers from "../Pages/Dashboard/Admin Dashboard/ManageUsers";
 import AddProducts from "../Pages/Dashboard/Admin Dashboard/AddProducts";
 import Cart from "../Pages/Dashboard/UserDashboard/Cart";
 import Home from "../Pages/Home/Home/Home";
+import ProductDetails from "../Pages/Home/Products/ProductDetails";
 
 
 export const router = createBrowserRouter([
@@ -30,6 +30,10 @@ export const router = createBrowserRouter([
                 path: "signup",
                 element: <Signup></Signup>
             },
+            {
+                path: "product/:id",
+                element: <ProductDetails></ProductDetails>
+            }
         ]
     },
     {
@@ -48,10 +52,6 @@ export const router = createBrowserRouter([
             {
                 path: 'addProducts',
                 element: <AddProducts></AddProducts>
-            },
-            {
-                path: 'manageUsers',
-                element: <ManageUsers></ManageUsers>
             },
             {
                 path: 'manageProducts',

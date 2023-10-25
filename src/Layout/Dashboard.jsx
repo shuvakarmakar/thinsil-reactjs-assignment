@@ -27,12 +27,6 @@ const Dashboard = () => {
                             {isAdmin ? (
                                 <>
                                     <li>
-                                        <NavLink to="/dashboard/manageUsers">
-                                            <FaUser className="mr-2" />
-                                            Manage Users
-                                        </NavLink>
-                                    </li>
-                                    <li>
                                         <NavLink to="/dashboard/addProducts">
                                             <FaProductHunt className="mr-2" />
                                             Add Products
@@ -58,12 +52,6 @@ const Dashboard = () => {
                                         <NavLink to="/dashboard/cart">
                                             <FaCartPlus className="mr-2" />
                                             Cart
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to="/dashboard/checkout">
-                                            <FaCartPlus className="mr-2" />
-                                            Checkout
                                         </NavLink>
                                     </li>
                                     <div className="divider"></div>

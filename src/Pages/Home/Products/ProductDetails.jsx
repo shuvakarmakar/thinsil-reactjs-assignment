@@ -36,11 +36,8 @@ const ProductDetails = () => {
         const userData = {
             email: user?.email,
         };
-
-        // Ensure that the `id` is correctly extracted from the `params` object
         const productId = id;
 
-        // Ensure that product data is sent in the request body
         const requestData = {
             email: userData.email,
             quantity: 1,

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import SearchBox from '../SearchBox/SearchBox';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -48,6 +49,7 @@ const Products = () => {
 
     return (
         <div>
+            <SearchBox onSearch={handleSearch} />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {products.map((product) => (
                     <div
