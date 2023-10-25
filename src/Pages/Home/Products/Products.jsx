@@ -7,7 +7,7 @@ const Products = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://thinsil-reactjs-server.vercel.app/products')
             .then((response) => response.json())
             .then((data) => {
                 setProducts(data);
@@ -19,7 +19,7 @@ const Products = () => {
 
     const fetchProductsBySearchTerm = async (searchQuery) => {
         try {
-            const response = await fetch(`http://localhost:5000/products?search=${searchQuery}`);
+            const response = await fetch(`https://thinsil-reactjs-server.vercel.app/products?search=${searchQuery}`);
             if (response.ok) {
                 const data = await response.json();
                 setProducts(data);
@@ -34,7 +34,7 @@ const Products = () => {
     const handleSearch = (query) => {
         setSearchTerm(query);
         if (query.trim() === '') {
-            fetch('http://localhost:5000/products')
+            fetch('https://thinsil-reactjs-server.vercel.app/products')
                 .then((response) => response.json())
                 .then((data) => {
                     setProducts(data);

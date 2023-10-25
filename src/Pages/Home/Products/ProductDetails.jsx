@@ -12,7 +12,7 @@ const ProductDetails = () => {
     const [isAdmin] = useAdmin();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products/${id}`)
+        fetch(`https://thinsil-reactjs-server.vercel.app/products/${id}`)
             .then((response) => {
                 if (response.ok) {
                     return response.json();
@@ -44,7 +44,7 @@ const ProductDetails = () => {
             product: product, 
         };
 
-        fetch(`http://localhost:5000/cart/add/${productId}`, {
+        fetch(`https://thinsil-reactjs-server.vercel.app/cart/add/${productId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

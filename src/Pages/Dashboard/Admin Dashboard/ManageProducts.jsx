@@ -11,7 +11,7 @@ const ManageProducts = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await fetch('http://localhost:5000/products');
+            const response = await fetch('https://thinsil-reactjs-server.vercel.app/products');
             if (response.ok) {
                 const data = await response.json();
                 setProducts(data);
@@ -35,7 +35,7 @@ const ManageProducts = () => {
         try {
             const { _id, ...updateData } = selectedProduct;
 
-            const response = await fetch(`http://localhost:5000/products/${_id}`, {
+            const response = await fetch(`https://thinsil-reactjs-server.vercel.app/products/${_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ const ManageProducts = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/products/${productId._id}`, {
+            const response = await fetch(`https://thinsil-reactjs-server.vercel.app/products/${productId._id}`, {
                 method: 'DELETE',
             });
 

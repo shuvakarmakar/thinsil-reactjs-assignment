@@ -8,7 +8,7 @@ const Cart = () => {
 
     useEffect(() => {
         // Fetch the user's cart items from the backend based on user's email
-        fetch(`http://localhost:5000/cart/${user?.email}`)
+        fetch(`https://thinsil-reactjs-server.vercel.app/cart/${user?.email}`)
             .then((response) => {
                 if (response.ok) {
                     return response.json();
@@ -36,7 +36,7 @@ const Cart = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/cart/delete/${itemId}`, {
+                fetch(`https://thinsil-reactjs-server.vercel.app/cart/delete/${itemId}`, {
                     method: 'DELETE',
                 })
                     .then((response) => {

@@ -33,7 +33,7 @@ const AddProducts = () => {
             };
 
             // Send the product data to your server
-            const response = await fetch('http://localhost:5000/products', {
+            const response = await fetch('https://thinsil-reactjs-server.vercel.app/products', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
