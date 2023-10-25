@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaCartPlus } from 'react-icons/fa';
+import useAdmin from '../../hooks/useAdmin';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
     const navigate = useNavigate();
     const [userData, setUserData] = useState(null);
+    const [isAdmin] = useAdmin();
 
     useEffect(() => {
         if (user) {
@@ -25,7 +27,7 @@ const Navbar = () => {
         <>
             <li className="text-black"><Link to="/">Home</Link></li>
             <li><Link to="/dashboard">Dashboard</Link></li>
-            <li><Link to="/dashboard/cart"><FaCartPlus /> Cart</Link></li>
+            {!isAdmin && <li><Link to="/dashboard/cart"><FaCartPlus /> Cart</Link></li>}
         </>
     );
 
@@ -60,7 +62,7 @@ const Navbar = () => {
                 <div className="navbar-end">
                     {userData && (
                         <span className="text-slate-900 mr-2">
-                            Welcome, <Link to="/profile">{userData.name}</Link>
+                            Welcome, <Link to="/profile">{userData.displayName}</Link>
                         </span>
                     )}
                     <button onClick={handleLogout} className="btn btn-neutral">

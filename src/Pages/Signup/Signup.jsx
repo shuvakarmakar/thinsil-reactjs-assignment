@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
+import SocialLogin from '../SocialLogin/SocialLogin';
+import Swal from 'sweetalert2';
 
 const Signup = () => {
     const { register, handleSubmit, reset, formState: { errors }, watch } = useForm();
@@ -12,44 +14,42 @@ const Signup = () => {
     const password = watch('password', '');
 
     const onSubmit = (data) => {
-        // Create the user and log them in
         createUser(data.email, data.password)
-            .then((loggedUser) => {
+            .then(loggedUser => {
                 console.log(loggedUser);
-                // Save user data
-                const saveUser = { name: data.name, email: data.email };
-                fetch('/users', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(saveUser),
-                })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        if (data.insertedId) {
-                            reset();
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Sign Up Successful',
-                                showConfirmButton: false,
-                                timer: 1500,
-                            });
-                            navigate('/');
-                        } else {
-                            console.log('Error saving user data:', data);
-                        }
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        const saveUser = { name: data.name, email: data.email }
+                        fetch('http://localhost:5000/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    reset();
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Sign Up Successful',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    navigate('/');
+                                }
+                            })
                     })
                     .catch((error) => {
-                        console.log('Fetch error:', error);
+                        console.log(error);
                     });
             })
             .catch((error) => {
-                console.log('User creation error:', error);
+                console.log(error);
             });
     }
-
 
     return (
         <div className="hero min-h-screen bg-gradient-to-r from-purple-400 to-indigo-500">
@@ -127,6 +127,7 @@ const Signup = () => {
                         </div>
                     </form>
                     <p className="text-center text-gray-600 my-4">Already have an account? <Link to="/login" className="text-purple-600">Please login</Link></p>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>

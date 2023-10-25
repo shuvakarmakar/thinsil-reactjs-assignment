@@ -2,11 +2,16 @@ import {
     createBrowserRouter,
 } from "react-router-dom";
 import Main from "../Layout/Main";
-import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
 import Error from "../Pages/Error/Error";
-import Dashboard from "../Pages/Dashboard/Dashboard";
+import Dashboard from "../Layout/Dashboard";
+import ManageProducts from "../Pages/Dashboard/Admin Dashboard/ManageProducts";
+import ManageUsers from "../Pages/Dashboard/Admin Dashboard/ManageUsers";
+import AddProducts from "../Pages/Dashboard/Admin Dashboard/AddProducts";
+import Cart from "../Pages/Dashboard/UserDashboard/Cart";
+import Home from "../Pages/Home/Home/Home";
+
 
 export const router = createBrowserRouter([
     {
@@ -33,6 +38,26 @@ export const router = createBrowserRouter([
     },
     {
         path: 'dashboard',
-        element: <Dashboard></Dashboard>
-    }
+        element: <Dashboard></Dashboard>,
+        children: [
+            {
+                path: 'cart',
+                element: <Cart></Cart>
+            },
+            // Admin Route
+            {
+                path: 'addProducts',
+                element: <AddProducts></AddProducts>
+            },
+            {
+                path: 'manageUsers',
+                element: <ManageUsers></ManageUsers>
+            },
+            {
+                path: 'manageProducts',
+                element: <ManageProducts></ManageProducts>
+            }
+        ]
+    },
+
 ]);

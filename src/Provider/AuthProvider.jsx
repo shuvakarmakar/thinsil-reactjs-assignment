@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import app from '../../Firebase/firebase.config';
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import axios from 'axios';
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -30,6 +31,13 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, googleProvider);
     };
 
+    // Update Profile
+    const updateUserProfile = (name, photo) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: photo
+        })
+    }
+
     // Logout
     const logOut = () => {
         setLoading(true);
@@ -40,6 +48,20 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, loggedUser => {
             console.log('Loggedin user inside auth state', loggedUser);
+
+            // get and set token
+
+            if (loggedUser) {
+                axios.post('http://localhost:5000/jwt', { email: loggedUser.email })
+                    .then(data => {
+                        // console.log(data.data.token);
+                        localStorage.setItem('access-token', data.data.token)
+                        setLoading(false);
+                    })
+            }
+            else {
+                localStorage.removeItem('access-token')
+            }
 
             setLoading(false);
             setUser(loggedUser)
@@ -55,7 +77,8 @@ const AuthProvider = ({ children }) => {
         createUser,
         signIn,
         signInWithGoogle,
-        logOut
+        updateUserProfile,
+        logOut,
     }
 
     return (
